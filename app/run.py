@@ -30,7 +30,7 @@ engine = create_engine('sqlite:///../data/DisasterResponse.db')
 df = pd.read_sql_table('disaster_messages', engine)
 
 # load model
-model = joblib.load("../models/your_model_name.pkl")
+model = joblib.load("../models/classifier.pkl")
 
 
 # index webpage displays cool visuals and receives user input text for model
@@ -43,6 +43,13 @@ def index():
     genre_counts = df.groupby('genre').count()['message']
     genre_names = list(genre_counts.index)
     
+    #new 
+    category_names =  list(df.iloc[:,4:].columns)
+    category_count = (df.iloc[:,4:] != 0).sum().values
+    
+    sortx = [x for _,x in sorted(zip(category_count,category_names))]
+    sorty = sorted(category_count, reverse=True)    
+    
     # create visuals
     # TODO: Below is an example - modify to create your own visuals
     graphs = [
@@ -50,7 +57,11 @@ def index():
             'data': [
                 Bar(
                     x=genre_names,
-                    y=genre_counts
+                    y=genre_counts,
+                    text=genre_counts,
+                    textposition = 'auto',
+                    marker={'color': genre_counts, 
+                                           'colorscale': 'Jet'}
                 )
             ],
 
@@ -62,6 +73,39 @@ def index():
                 'xaxis': {
                     'title': "Genre"
                 }
+            }
+        },
+        {
+            'data': [
+                Bar(
+                    x=sortx,
+                    y=sorty,
+                    text=sorty,
+                    textposition = 'auto',
+                    marker=dict(
+                        color='rgb(100,202,225)',
+                        line=dict(
+                        color='rgb(72,61,139)',
+                        width=1),
+                    ),
+                    opacity=0.8
+                )
+            ],
+
+            'layout': {
+                'title': 'Messages per Categoriy Distribution',
+                'yaxis': {
+                    'title': "Count per Category"
+                },
+                'xaxis': {
+                    'title': "Category Name",
+                    'tickangle': 45
+                },
+                'height': 500,
+                'margin': dict(
+                    #t = 100,
+                    b = 150, 
+                )
             }
         }
     ]

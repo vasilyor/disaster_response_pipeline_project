@@ -48,7 +48,7 @@ def load_data(database_filepath):
 def tokenize(text):
 
     """ 
-    Function for clean and Tokanize text 
+    Function for Clean and Tokanize text 
     
     input:
     	text: the original text data
@@ -77,6 +77,16 @@ def tokenize(text):
 
 def build_model():
     
+    """ 
+    Function for Building Model.
+    Creating pipeline and using grid search to find better parameters.
+    
+    input:
+        None
+    output: 
+        Scikit model (after the use of GridSearch)
+    """
+
     # build pipeline
     pipeline = Pipeline([
         ('vect', CountVectorizer(tokenizer=tokenize)),
@@ -86,9 +96,9 @@ def build_model():
 
     parameters = {
         'vect__ngram_range': ((1, 1), (1, 2)),
-        #'vect__max_df': (0.7, 1.0),
+        'vect__max_df': (0.7, 1.0),
         #'vect__max_features': (None, 5000, 10000),
-        #'clf__estimator__n_estimators': [50, 100]
+        'clf__estimator__n_estimators': [50, 100]
     }
     
     cv = GridSearchCV(pipeline, parameters)
@@ -96,9 +106,22 @@ def build_model():
     return cv
 
 def evaluate_model(model, X_test, Y_test, category_names):
+    
+    """ 
+    Function for evaluating the Model. 
+    
+    input:
+        model: Scikit model
+        X_test: the test data set
+        Y_test: the set of labels to all the data in x_test
+        category_names:  individual category used for clasification
+
+    output: 
+        Print Classification Report (Report the f1 score, precision and recall)
+    """
 
     y_pred = model.predict(X_test)
-    print(classification_report(Y_test, y_pred))
+    print(classification_report(Y_test.iloc[:,1:].values, np.array([x[1:] for x in y_pred]), target_names=categories))
 
 def save_model(model, model_filepath):
     
