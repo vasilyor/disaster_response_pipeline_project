@@ -56,7 +56,6 @@ A web app is included where an emergency worker can input a new message and get 
 #### How the Flask App looks like
 ![Flask App screenshot1](img/1.png)
 
-![Flask App screenshot1](img/3.png)
 <br><br><br>
 #### Example from a message input and classification results in several categories
 ![Flask App screenshot2](img/2.png)

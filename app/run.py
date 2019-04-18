@@ -47,8 +47,9 @@ def index():
     category_names =  list(df.iloc[:,4:].columns)
     category_count = (df.iloc[:,4:] != 0).sum().values
     
-    sortx = [x for _,x in sorted(zip(category_count,category_names))]
-    sorty = sorted(category_count, reverse=True)    
+    #sorting the results
+    sortx = [x for _,x in sorted(zip(category_count, category_names))]
+    sorty = sorted(category_count)    
     
     # create visuals
     # TODO: Below is an example - modify to create your own visuals
