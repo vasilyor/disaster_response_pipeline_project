@@ -8,13 +8,12 @@ Udacity Data Scientist Nanodegree Project
 3. [Instructions](#instructions)
 4. [Screenshots](#screenshots)
 
-<br>
 ## Project Summary <a name="summary"></a>
 
 The project analyze disaster data from <a href="www.figure-eight.com">Figure Eight </a> and builds a model for an API that classifies disaster messages. Data set used contains real messages sent during disaster events.
 
 A web app is included where an emergency worker can input a new message and get classification results in several categories. The web app will also display visualizations of the data.
-<br><br>
+
 ## File Structure <a name="file"></a>
 
 ```
@@ -36,7 +35,7 @@ A web app is included where an emergency worker can input a new message and get 
 
 - README.md
 ```
-<br>
+
 ## Instructions: <a name="instructions"></a>
 1. Run the following commands in the project's root directory to set up your database and model.
 
@@ -50,13 +49,12 @@ A web app is included where an emergency worker can input a new message and get 
 
 3. Go to http://0.0.0.0:3001/
 
-<br>
+
 ## Screenshots: <a name="screenshots"></a>
 
 #### How the Flask App looks like
 ![Flask App screenshot1](img/1.png)
 
-<br><br><br>
 #### Example from a message input and classification results in several categories
 ![Flask App screenshot2](img/2.png)
 
