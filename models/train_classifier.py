@@ -93,10 +93,12 @@ def build_model():
         ('tfidf', TfidfTransformer()),
         ('clf', MultiOutputClassifier(RandomForestClassifier()))
     ])
-
+	
+    #with more parameters it might take really long time to train the model based on the compute power you have
+	#also the pickle model file can grow big 
     parameters = {
         'vect__ngram_range': ((1, 1), (1, 2)),
-        'vect__max_df': (0.7, 1.0),
+        #'vect__max_df': (0.7, 1.0),
         #'vect__max_features': (None, 5000, 10000),
         'clf__estimator__n_estimators': [50, 100]
     }
